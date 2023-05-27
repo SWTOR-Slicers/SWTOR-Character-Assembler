@@ -10,3 +10,5 @@ It adds a few features:
 The installation process is as any other standard Blender addon. In order to work, it requires us to set the path to a "resources" folder resulted from a game assets extraction through Slicers GUI (with presets "All" or "Dynamic") or EasyMYP. We do that in its Preferences panel.
 
 The Addon appears in the 3D Viewport's Sidebar as a "SWTOR Char Locator" tab containing a single button. Instead of selecting a character's whole folder, it needs us to select the "path.json" file inside. Processing the file is nearly instantaneous. Once done, the character ought to be ready for import.
+
+## **[Download the latest release](https://github.com/SWTOR-Slicers/SWTOR-Character-Locator/releases/latest)**
