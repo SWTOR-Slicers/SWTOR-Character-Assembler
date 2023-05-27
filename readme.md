@@ -1,6 +1,8 @@
-This Blender Addon reproduces the function of Slicers GUI's Locate button, filling the Player Characters and NPCs' folders exported by TORCommunity.com's Character Designer and NPC database with all the game assets required for the .gr2 Importer Addon's Character Import feature to reconstruct them.
+# SWTOR Character Locator
 
-It adds a few features:
+This Blender Addon reproduces the function of the Slicers GUI tool's Locate feature as a Blender button in its 3D Viewers' sidebar, filling the selected Player Character or NPC's folder, exported by TORCommunity.com's Character Designer and NPC database, with all the game assets required for the .gr2 Importer Addon's Character Import feature to reconstruct them.
+
+It adds a few novelties to the Locating process:
 * Progress and error reporting through Blender's Console. It is recommended to keep it open to check for any error message, as it lists all the files it detects and copies, showing if any entry is malformed or leads to an inexistent file.
 * It gathers a few extra texturemap types:
   * **DirectionMaps**, that can be used by the Creature, SkinB, and HairC Shaders.
