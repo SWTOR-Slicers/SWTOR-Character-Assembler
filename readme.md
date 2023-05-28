@@ -7,10 +7,10 @@ It fills a Player Character/NPC's folder (exported by TORCommunity.com's Charact
 It adds a few novelties to the Locating process:
 * **It reports its progress and errors through Blender's Console**. It is recommended to keep it open to check for any error message, as it lists all the files it detects and copies, showing if any entry is malformed or leads to an inexistent file.
 * **It places a "black.dds" file in `resources\art\defaultassets` if it is missing**.
-* It gathers a few extra texturemap types:
+* **It gathers a few extra texturemap types**:
   * **DirectionMaps**, that can be used by the Creature, SkinB, and HairC Shaders.
   * **WrinklesMaps**, meant to be used in heads' SkinB Shaders (they don't support them yet, but some experiments are being carried in order to take advantage of them).
-* It gathers too the character or NPC's **skeleton rig**, saving it inside a "skeleton" folder next to "models" and "materials".
+* **It gathers the character or NPC's skeleton rig**, saving it inside a "skeleton" folder next to "models" and "materials".
 
 The installation process is as any other standard Blender addon. In order to work, it requires us to set the path to a "resources" folder resulted from a game assets extraction through Slicers GUI (with presets "All" or "Dynamic") or EasyMYP. We do that in its Preferences panel. If not set, the Addon's button will be greyed out.
 
