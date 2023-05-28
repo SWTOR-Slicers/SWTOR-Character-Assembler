@@ -1,6 +1,6 @@
 # SWTOR Character Assembler
 
-**This Blender addon combines the functionality of the [Slicers GUI](https://github.com/SWTOR-Slicers/Slicers-GUI) tool's Locate feature and the [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)'s Character Importer as an automated one-button process.**
+**This Blender addon combines the functionality of the [Slicers GUI Tool](https://github.com/SWTOR-Slicers/Slicers-GUI)'s Locate feature and the [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)'s Character Importer as an automated one-button process.**
 
 It fills a Player Character/NPC's folder (exported by TORCommunity.com's Character Designer and NPC database) with all the game assets required for the .gr2 Importer Addon's Character Import feature to reconstruct them, and calls such addon to do the importing
 
