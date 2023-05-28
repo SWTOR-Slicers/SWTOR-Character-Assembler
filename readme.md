@@ -6,7 +6,7 @@ It fills a Player Character/NPC's folder (exported by TORCommunity.com's Charact
 
 It adds a few novelties to the Locating process:
 * **It reports its progress and errors through Blender's Console**. It is recommended to keep it open to check for any error message, as it lists all the files it detects and copies, showing if any entry is malformed or leads to an inexistent file.
-* It places a "black.dds" file in `resources\art\defaultassets` if it is missing.
+* **It places a "black.dds" file in `resources\art\defaultassets` if it is missing**.
 * It gathers a few extra texturemap types:
   * **DirectionMaps**, that can be used by the Creature, SkinB, and HairC Shaders.
   * **WrinklesMaps**, meant to be used in heads' SkinB Shaders (they don't support them yet, but some experiments are being carried in order to take advantage of them).
