@@ -1,4 +1,4 @@
-# SWTOR Character Locator
+# SWTOR Character Assembler
 
 **This Blender Addon acts as a Slicers GUI tool's Locate feature replacement**: it fills a Player Character or NPC's folder (exported by TORCommunity.com's Character Designer and NPC database) with all the game assets required for the .gr2 Importer Addon's Character Import feature to reconstruct them.
 
