@@ -1,5 +1,5 @@
 import bpy
-from bpy.props import StringProperty
+from bpy.props import StringProperty, BoolProperty
 from bpy.types import Operator
 
 import os
@@ -74,11 +74,29 @@ def black_dds(swtor_resources_folderpath):
 
 # Class
 
-class SWTOR_OT_character_locator(Operator):
+class SWTOR_OT_character_assembler(Operator):
     bl_label = "SWTOR Character Locator"
-    bl_idname = "swtor.character_locator"
-    bl_description = "Processes the 'path.json' file in a Player Character/NPC folder\nexported by TORCommunity.com, filling its subfolders\nwith all related objects and textures.\n\n• Requires setting the path to a 'resources' folder in this addon's Preferences"
+    bl_idname = "swtor.character_assembler"
+    bl_description = "Processes the 'path.json' file in a Player Character/NPC folder\nexported by TORCommunity.com, filling its subfolders with all\nrelated objects and textures, then importing the Character\n\n• Requires setting the path to a 'resources' folder in this addon's Preferences"
     filepath: StringProperty(subtype='FILE_PATH')
+
+
+    # Some properties
+    
+    gather_only_bool: bpy.props.BoolProperty(
+        name="Gather Assets Only",
+        description="Don't Import The Character, and just copy the required assets\nto the Character's folder",
+        default = False,
+        options={'HIDDEN'}
+    )
+
+    dont_overwrite_bool: bpy.props.BoolProperty(
+        name="Don't overwrite Existing assets",
+        description="If the character's folder contains some assets already, don't overwrite those.\nThat will preserve any changes done to them, such as manual retouchings",
+        default = True,
+        options={'HIDDEN'}
+    )
+
 
 
     def execute(self, context):
@@ -89,6 +107,11 @@ class SWTOR_OT_character_locator(Operator):
         CURSOR_HOME = '\033[H'          # Move cursor to upper left corner.
         CLEAR_EOL = '\r\033[K'          # Erase to end of current line.
         LINE_BACK_1ST_COL = '\033[F'    # Move cursor one line up, 1st column.
+
+
+        # Sync properties with their UI matches
+        self.gather_only_bool = context.scene.gather_only_bool
+        self.dont_overwrite_bool = context.scene.dont_overwrite_bool
 
 
         # Get the extracted SWTOR assets' "resources" folder from the add-on's preferences. 
@@ -239,9 +262,9 @@ class SWTOR_OT_character_locator(Operator):
                     origin = element[2]
                     destination = element[3]
                     report = element[4]
-
-                    print(body_part, "-", asset_type, "\n",origin, "\n",destination)
                     
+                    print(body_part, "-", asset_type, "\n",origin, "\n",destination)
+
                     # If any of the destination folders doesn't exist, create it
                     # ('eye', typically, plus any new one such as 'skeleton')
                     if Path(destination).parent.exists() == False:
@@ -249,19 +272,23 @@ class SWTOR_OT_character_locator(Operator):
                             Path(destination).parent.mkdir(parents=False, exist_ok=True)
                             print("Creating " + str(Path(destination).parent) + "folder.\n")
                         except Exception as e:
-                            print("--------ERROR: The folder ",destination," didn't exist.\nWhen trying to create it an error occurred:\n",e,"\n")
+                            print("ERROR!!!--------: The folder ",destination," didn't exist and when trying to create it an error occurred:\n",e,"\n")
                     
-                    # File copy as such:
-                    try:
-                        shutil.copy2(origin, destination)
-                    except Exception as e:
-                        print("--------ERROR!!!\n", str(e))
-                        print()
-                        errors_report.append(body_part + " - " + asset_type + " - " + str(origin))
+                    if Path(destination).exists() == True and self.dont_overwrite_bool == True:
+                        print("FILE ALREADY EXISTS IN DESTINATION. PRESERVED")
+                    else:
+                        # File copy as such:
+                        try:
+                            shutil.copy2(origin, destination)
+                            print("COPIED")
+                        except Exception as e:
+                            print("ERROR!!!-------- ", str(e))
+                            print()
+                            errors_report.append(body_part + " - " + asset_type + " - " + str(origin))
                     
                     print()
                         
-        print("DONE!")
+        print("ASSETS GATHERING DONE!")
         print()
         if errors_report:
             print("Some files failed to be copied:\n")
@@ -272,6 +299,16 @@ class SWTOR_OT_character_locator(Operator):
             self.report({'INFO'}, "Character's Assets copied to its folder. SOME FILES FAILED TO BE COPIED! Check the console's output." )
         else:
             self.report({'INFO'}, "Character's Assets copied to its folder" )
+            
+        
+        # Calling Darth Atroxa's Character Importer in his .gr2 Importer Addon.
+        if self.gather_only_bool == False:
+            print("IMPORTING CHARACTER")
+            print("Importing and assembling the character assets")
+            print()
+            bpy.ops.import_mesh.gr2_json(filepath = str( self.filepath ))
+            print()
+            print("DONE!")
             
         return {'FINISHED'}
 
@@ -292,11 +329,11 @@ class SWTOR_OT_character_locator(Operator):
 # 3D VIEWPORT PANEL ---------------------------------------------
 
 # Files Tools sub-panel
-class SWTOR_PT_character_locator(bpy.types.Panel):
+class SWTOR_PT_character_assembler(bpy.types.Panel):
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "SWTOR Char Locator"
-    bl_label = "SWTOR Character Locator"
+    bl_category = "SWTOR Tools"
+    bl_label = "SWTOR Character Assembler"
 
     def draw(self, context):
 
@@ -311,7 +348,7 @@ class SWTOR_PT_character_locator(bpy.types.Panel):
         addon_advice = layout.column(align=True)
         addon_advice.scale_y = 0.7        
         if resources_folder_exists != True:
-            addon_advice.label(text="Set path to the 'resources' folder")
+            addon_advice.label(text="Please select a 'resources' folder")
             addon_advice.label(text="in this add-on's Preferences")
         else:
             addon_advice.label(text="Opening the Console window is")
@@ -321,8 +358,9 @@ class SWTOR_PT_character_locator(bpy.types.Panel):
         # locate_characters_assets UI
         tool_section = layout.box().column(align=True)
         tool_section.enabled = resources_folder_exists
-        tool_section.operator("swtor.character_locator", text="Select 'paths.json' File")
-
+        tool_section.operator("swtor.character_assembler", text="Select 'paths.json' File")
+        tool_section.prop(context.scene, "gather_only_bool", text="Gather Assets only.")
+        tool_section.prop(context.scene, "dont_overwrite_bool", text="Don't Overwrite Assets.")
 
 
 
@@ -331,17 +369,32 @@ class SWTOR_PT_character_locator(bpy.types.Panel):
 # REGISTRATIONS ---------------------------------------------
 
 classes = [
-    SWTOR_OT_character_locator,
-    SWTOR_PT_character_locator,
+    SWTOR_OT_character_assembler,
+    SWTOR_PT_character_assembler,
 ]
 
 def register():
     for cls in classes:
         bpy.utils.register_class(cls)
+        
+    bpy.types.Scene.gather_only_bool = bpy.props.BoolProperty(
+        name="Gather Assets Only",
+        description="Don't import the character, just copy the required assets\nto the Character's folder",
+        default = False,
+    )
+    bpy.types.Scene.dont_overwrite_bool = bpy.props.BoolProperty(
+        name="Don't overwrite Existing assets",
+        description="If the character's folder contains some assets already, don't overwrite those.\nThat will preserve any changes done to them, such as manual retouchings",
+        default = True,
+    )
+
 
 def unregister():
     for cls in reversed(classes):
-        bpy.utils.unregister_class(cls)
+        bpy.utils.unregister_class(cls) 
+        
+    del bpy.types.Scene.gather_only_bool
+    del bpy.types.Scene.dont_overwrite_bool
 
 if __name__ == "__main__":
     register()

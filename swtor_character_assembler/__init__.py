@@ -4,13 +4,13 @@ import importlib
 # Add-on Metadata
 
 bl_info = {
-    "name": "SWTOR Character Locator",
+    "name": "SWTOR Character Assembler",
     "author": "ZeroGravitas",
     "version": (1, 0, 0),
     "blender": (3, 1, 0),
     "category": "SWTOR",
-    "location": "View 3D > Sidebar > ZG SWTOR",
-    "description": "Processes SWTOR characters and NPCs' folders exported from TORCommunity.com",
+    "location": "View 3D > Sidebar > SWTOR Tools",
+    "description": "Processes SWTOR characters and NPCs' folders exported from TORCommunity.com,\ngathering their files from a game asset extraction and assembling them",
     "doc_url": "https://github.com/SWTOR-Slicers/swtor-character-locator",
     "tracker_url": "",
 }
@@ -21,7 +21,7 @@ bl_info = {
 
 modulesNames = [
     'preferences',
-    'swtor_character_locator',
+    'swtor_character_assembler',
     ]
   
 modulesFullNames = {}
