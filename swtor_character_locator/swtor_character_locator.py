@@ -1,14 +1,17 @@
 import bpy
-import json
 from bpy.props import StringProperty
 from bpy.types import Operator
+
+import os
 from pathlib import Path
 import shutil
+
+import json
 import xml.etree.ElementTree as ET
 
 
 
-# Aux Function
+# Aux Functions
 
 def get_wrinkles_and_directionmaps(mat_file_abs_path):
     '''Reads a shader .mat file and returns any DirectionMap
@@ -47,6 +50,28 @@ def get_wrinkles_and_directionmaps(mat_file_abs_path):
 
     return(relative_paths)
 
+def black_dds(swtor_resources_folderpath):
+    addon_directory = os.path.dirname(__file__)
+
+    black_dds_origin = Path(addon_directory) / "black.dds"
+    black_dds_destination = Path(swtor_resources_folderpath) / "art/defaultassets/black.dds"
+    
+    if black_dds_destination.exists() == False:
+        print ("'black.dds' file missing in 'resources\\art\\defaultassets'. Placing a copy of the file \(included in this Addon\) there.")
+        print()
+        print()
+        try:
+            shutil.copy2( str(black_dds_origin), str(black_dds_destination) )
+        except Exception as e:
+            print("ERROR: Copying the 'black.dds' file to the resources folder failed:")
+            print(e)
+            print()
+
+    return
+
+
+
+
 # Class
 
 class SWTOR_OT_character_locator(Operator):
@@ -75,22 +100,23 @@ class SWTOR_OT_character_locator(Operator):
             return {"CANCELLED"}
 
 
-        if self.filepath.endswith("paths.json") == False:
-            self.report({"WARNING"}, "The selected file isn't a 'path.json' file. Please select a correct one.")
-            return {"CANCELLED"}
-
-        # Process .json file
         print(CLEAR_TERMINAL + CURSOR_HOME)
         print("=================================")
         print("CHARACTER FOLDER'S ASSETS LOCATOR")
         print("=================================")
         print()
-        print("Processing JSON file:\n" + self.filepath)
         print()
-        print()
+
+        # Check for the existence of a "black.dds" file in resources/art/defaultassets and add one if missing
+        black_dds(swtor_resources_folderpath)
+
+
+        if self.filepath.endswith("paths.json") == False:
+            self.report({"WARNING"}, "The selected file isn't a 'path.json' file. Please select a correct one.")
+            return {"CANCELLED"}
         
         # list of origins and destinations for copying. Each element is:
-        # [slotName, type of asset, origin, destination, report if any]
+        # [slotName, type of asset, origin, destination, some report text if needed]
         
         files_to_copy = []
         
@@ -204,6 +230,8 @@ class SWTOR_OT_character_locator(Operator):
 
             # Process list of files to copy to character folder
             
+            errors_report = []
+            
             if files_to_copy:
                 for element in files_to_copy:
                     body_part = element[0]
@@ -214,6 +242,8 @@ class SWTOR_OT_character_locator(Operator):
 
                     print(body_part, "-", asset_type, "\n",origin, "\n",destination)
                     
+                    # If any of the destination folders doesn't exist, create it
+                    # ('eye', typically, plus any new one such as 'skeleton')
                     if Path(destination).parent.exists() == False:
                         try:
                             Path(destination).parent.mkdir(parents=False, exist_ok=True)
@@ -221,17 +251,28 @@ class SWTOR_OT_character_locator(Operator):
                         except Exception as e:
                             print("--------ERROR: The folder ",destination," didn't exist.\nWhen trying to create it an error occurred:\n",e,"\n")
                     
+                    # File copy as such:
                     try:
                         shutil.copy2(origin, destination)
                     except Exception as e:
                         print("--------ERROR!!!\n", str(e))
                         print()
+                        errors_report.append(body_part + " - " + asset_type + " - " + str(origin))
                     
                     print()
                         
         print("DONE!")
-        
-        self.report({'INFO'}, "Character's Assets copied to its folder" )
+        print()
+        if errors_report:
+            print("Some files failed to be copied:\n")
+            for error_report in errors_report:
+                print("     " + error_report)
+            print("\nPlease check the console for their related error messages, and their entries in the 'paths.json' and/or related .mat files.")
+            
+            self.report({'INFO'}, "Character's Assets copied to its folder. SOME FILES FAILED TO BE COPIED! Check the console's output." )
+        else:
+            self.report({'INFO'}, "Character's Assets copied to its folder" )
+            
         return {'FINISHED'}
 
 
