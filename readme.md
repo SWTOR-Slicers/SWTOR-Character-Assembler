@@ -21,6 +21,6 @@ There are some options checkboxes:
 * **Gather Assets Only**: it only locates and copies the asset files to the character folder.
 * **Don't Overwrite Assets**: if a located file already exists in the folder, it preserves it instead of overwriting it. Useful if the files in the folder have been modified in some manner, such as retouching a texture, without changing the name.
 
-**WARNING: this addon doesn't solve the problem of character objects with two materials** (armor or clothes that let skin show, such as undergarments) showing the first material in the areas where the second material ought to show up. This is a bug in the .gr2 Importer Addon that is being investigated. As soon as it is solved there it will work correctly here, too.
+**WARNING: this addon doesn't solve the problem of character objects with two materials areas showing the first one in both areas** (skin areas in skimpy armor or undergarments). This is a bug in the .gr2 Importer Addon that is being investigated. As soon as it is solved there it will work correctly here, too.
 
 ## **[Download the latest release here](https://github.com/SWTOR-Slicers/SWTOR-Character-Locator/releases/latest)**
