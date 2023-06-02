@@ -6,12 +6,12 @@ import importlib
 bl_info = {
     "name": "SWTOR Character Assembler",
     "author": "ZeroGravitas",
-    "version": (1, 0, 0),
+    "version": (2, 0, 0),
     "blender": (3, 1, 0),
-    "category": "SWTOR",
+    "category": "SWTOR Tools",
     "location": "View 3D > Sidebar > SWTOR Tools",
-    "description": "Processes SWTOR characters and NPCs' folders exported from TORCommunity.com,\ngathering their files from a game asset extraction and assembling them",
-    "doc_url": "https://github.com/SWTOR-Slicers/swtor-character-locator",
+    "description": "Imports SWTOR characters and NPCs' folders exported from TORCommunity.com",
+    "doc_url": "https://github.com/SWTOR-Slicers/swtor-character-assembler",
     "tracker_url": "",
 }
 
@@ -21,7 +21,8 @@ bl_info = {
 
 modulesNames = [
     'preferences',
-    'swtor_character_assembler',
+    'character_assembler',
+    'prefixer',
     ]
   
 modulesFullNames = {}
