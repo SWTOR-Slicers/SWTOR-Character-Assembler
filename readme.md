@@ -6,10 +6,13 @@
 
 
 It requires:
+* **An installed and enabled [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)**, as it relies on it for the actual importing into Blender.
 * **A SWTOR assets extraction** performed via Slicers GUI (with either the "Dynamic" or "All" presets) or EasyMYP.
 * **TORCommunity.com's Character Designer-exported (unzipped) folders**, or non-Creature-type NPCs ones exported from its NPC database (which is down at the moment, sadly 🙁).  
   **THERE'S NO NEED TO PROCESS THE FOLDERS WITH SLICERS GUI'S LOCATE FEATURE**. It's the whole point of this new Addon 🙂.
+
 ## Features
+
 The SWTOR Character Assembler:
 * Fills a Player Character/NPC's folder (exported by TORCommunity.com's Character Designer or NPC database) with all the game assets required for assembling them in Blender.  
   **It gathers the character or NPC's skeleton rig**, saving it inside a "skeleton" folder next to "models" and "materials".
