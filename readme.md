@@ -6,10 +6,21 @@
 
 
 It requires:
-* **An installed and enabled [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)**, as it relies on it for the actual importing into Blender.
+* **An installed and enabled latest release of the [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)**, as it relies on it for the actual importing into Blender.
 * **A SWTOR assets extraction** performed via Slicers GUI (with either the "Dynamic" or "All" presets) or EasyMYP.
 * **TORCommunity.com's Character Designer-exported (unzipped) folders**, or non-Creature-type NPCs ones exported from its NPC database (which is down at the moment, sadly 🙁).  
   **THERE'S NO NEED TO PROCESS THE FOLDERS WITH SLICERS GUI'S LOCATE FEATURE**. It's the whole point of this new Addon 🙂.
+
+---
+### **[Download the Addon's latest release](https://github.com/SWTOR-Slicers/SWTOR-Character-Locator/releases/latest)**
+---
+
+## Installation
+The installation process is the typical for any standard Blender Addon. In order to work, it requires us to set the path to a SWTOR assets extraction's `resources` folder. We do that in its Preferences panel. If not set, the Addon's button will be greyed out.
+
+![Alt text](images/swtor-character-assembler-020.png)
+
+The Addon appears in the 3D Viewport's Sidebar as a "SWTOR Character Tools" tab. Instead of selecting a character's whole folder as we do with the Slicers GUI tool, it needs us to select the "path.json" file inside, instead. Processing the file is nearly instantaneous.
 
 ## Features
 
@@ -37,11 +48,4 @@ The Addon's importing options are:
 * **Import Rigging Skeleton**: imports the character's skeleton, without binding the character's objects to it. **WARNING: the .gr2 Importer Addon that this one uses under the hood isn't yet compatible with the skeletons of SWTOR 64 bit (released with the latest Game Update). So, for the time being, it's not recommended to use this option or the next one, unless we are working with assets extracted from SWTOR 32 bit (previous to the Game Update)**.
 * **Bind Objects To Skeleton**: binds the character's objects to the imported skeleton.
 
-## Installation
-The installation process is the typical in any standard Blender Addon. In order to work, it requires us to set the path to a SWTOR assets extraction's `resources` folder. We do that in its Preferences panel. If not set, the Addon's button will be greyed out.
 
-![Alt text](images/swtor-character-assembler-020.png)
-
-The Addon appears in the 3D Viewport's Sidebar as a "SWTOR Character Tools" tab. Instead of selecting a character's whole folder as we do with the Slicers GUI tool, it needs us to select the "path.json" file inside, instead. Processing the file is nearly instantaneous.
-
-## **[Download the Addon's latest release](https://github.com/SWTOR-Slicers/SWTOR-Character-Locator/releases/latest)**
