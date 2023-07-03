@@ -17,7 +17,7 @@ It requires:
 ---
 
 ## Installation
-The installation process is the typical for any standard Blender Addon. In order to work, it requires us to set the path to a SWTOR assets extraction's `resources` folder. We do that in its Preferences panel. If not set, the Addon's button will be greyed out.
+The installation process is the typical for any standard Blender Addon. In order to work, it requires us to set the path to a SWTOR assets extraction's `resources` folder (typically inside the folder designated as Output Folder for the Slicers GUI app). We do that in its Preferences panel. If not set, the Addon's button will be greyed out.
 
 ![Alt text](images/swtor-character-assembler-020.png)
 
