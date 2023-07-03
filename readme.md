@@ -6,6 +6,7 @@
 
 
 It requires:
+* **Working with Blender 3.1 at the very least**. It *is* possible that it works with some of the last 2.8 versions, but Blender has been introducing some subtle changes during these last years that might make the Addon malfunction. 
 * **An installed and enabled latest release of the [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)**, as it relies on it for the actual importing into Blender.
 * **A SWTOR assets extraction** performed via Slicers GUI (with either the "Dynamic" or "All" presets) or EasyMYP.
 * **TORCommunity.com's Character Designer-exported (unzipped) folders**, or non-Creature-type NPCs ones exported from its NPC database (which is down at the moment, sadly 🙁).  
