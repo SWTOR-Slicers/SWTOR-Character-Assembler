@@ -27,7 +27,7 @@ The Addon appears in the 3D Viewport's Sidebar as a "SWTOR Character Tools" tab.
 
 The SWTOR Character Assembler:
 * Fills a Player Character/NPC's folder (exported by TORCommunity.com's Character Designer or NPC database) with all the game assets required for assembling them in Blender.  
-  **It gathers the character or NPC's skeleton rig**, saving it inside a "skeleton" folder next to "models" and "materials".
+  **It can gather the character or NPC's skeleton rig**, saving it inside a "skeleton" folder next to "models" and "materials".
 
   It solves some long lingering issues, such as placing the typically **missing "black.dds" texturemap** in our SWTOR asset extractions if detected as missing.  
   It also gathers some maps that weren't being covered by Slicers GUI:
