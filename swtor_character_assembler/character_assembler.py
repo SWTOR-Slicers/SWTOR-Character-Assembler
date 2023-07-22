@@ -123,6 +123,8 @@ def link_collections_to_collection(collections, destination_collection, create =
     Accepts both data-blocks and ID strings.
     Accepts a single collection or a list of collections. 
     If create == True, creates destination_collection if it doesn't exists.
+    If move == True, unlink from any collections it is in before placing in destination.
+
     """
 
     if collections:
@@ -150,7 +152,7 @@ def link_collections_to_collection(collections, destination_collection, create =
             # If move == True, unlink from any collections it is in.
             if move == True:
                 # Unlink from all collections in the scene.
-                for scene_collection in list(bpy.context.scene.collection.children):
+                for scene_collection in list(bpy.context.scene.collection.children_recursive):
                     if collection in list(scene_collection.children):
                         scene_collection.children.unlink(collection)
                 # Also unlink from the Scene Collection
@@ -169,18 +171,24 @@ def link_collections_to_collection(collections, destination_collection, create =
         return False
 
 
+
+
+
+
+
+
 # Class
 
 class SWTOR_OT_character_assembler(Operator):
-    bl_label = "SWTOR Character Assembler"
     bl_idname = "swtor.character_assembler"
-    bl_description = "Processes the 'path.json' file in a Player Character/NPC folder\nexported by TORCommunity.com, filling its subfolders with all\nrelated objects and textures, then importing the Character\n\n• Requires setting the path to a 'resources' folder in this addon's Preferences"
+    bl_label = "SWTOR Character Assembler"
+    bl_description = "Processes the 'path.json' file in a Player Character/NPC folder\nexported by TORCommunity.com, filling its subfolders with all\nrelated objects and textures, then importing the Character\n\n• Requires setting the path to a 'resources' folder in this addon's Preferences.\n• Requires an enabled modern .gr2 Importer Addon (not the Legacy version)"
     bl_options = {'REGISTER', 'UNDO'}
 
     filepath: StringProperty(subtype='FILE_PATH')
 
 
-    # Some properties
+    # Properties
     
     gather_only: bpy.props.BoolProperty(
         name="Gather Assets Only",
@@ -188,6 +196,13 @@ class SWTOR_OT_character_assembler(Operator):
         default = False,
         options={'HIDDEN'}
     )
+
+    # assemble_only: bpy.props.BoolProperty(
+    #     name="Assemble Assets Only",
+    #     description="Don't gather assets, just use what's available in the\nCharacter's folder, even if it is incomplete",
+    #     default = False,
+    #     options={'HIDDEN'}
+    # )
 
     dont_overwrite: bpy.props.BoolProperty(
         name="Don't overwrite Existing assets",
@@ -224,12 +239,6 @@ class SWTOR_OT_character_assembler(Operator):
         options={'HIDDEN'}
     )
 
-    prefix_everything: bpy.props.BoolProperty(
-        name="Prefix All Names With:",
-        description="Prefix all objects, their Materials, and the Collections they are in\nwith the text in the following field.",
-        default = True,
-        options={'HIDDEN'}
-    )
 
     def execute(self, context):
         # Terminal's VT100 escape codes (most terminals understand them).
@@ -243,6 +252,7 @@ class SWTOR_OT_character_assembler(Operator):
 
         # Sync properties with their UI matches
         self.gather_only = context.scene.swca_gather_only_bool
+        # self.assemble_only = context.scene.swca_assemble_only_bool
         self.dont_overwrite = context.scene.swca_dont_overwrite_bool
         self.collect = context.scene.swca_collect_bool
         self.import_armor_only = context.scene.swca_import_armor_only
@@ -572,7 +582,6 @@ class SWTOR_OT_character_assembler(Operator):
             else:
                 print("\nThis character has no naked or default underwear body parts\n")
                 
-                
             print()
             print("DONE!")
             
@@ -589,67 +598,22 @@ class SWTOR_OT_character_assembler(Operator):
 
 
 
-
-
-
-# 3D VIEWPORT PANEL ---------------------------------------------
-
-# Files Tools sub-panel
-class SWTOR_PT_character_assembler(bpy.types.Panel):
-    bl_space_type = "VIEW_3D"
-    bl_region_type = "UI"
-    bl_category = "SWTOR Character Tools"
-    bl_label = "SWTOR Character Assembler"
-
-    def draw(self, context):
-
-        # Check that there is a "resources" folder set in Preferences
-        swtor_resources_folderpath = bpy.context.preferences.addons[__package__].preferences.swtor_resources_folderpath
-        resources_folder_exists = ( Path(swtor_resources_folderpath) / "art/shaders/materials").exists()
-
-
-        layout = self.layout
-
-        # Show a warning if the 'resources' folder isn't set in the addon's prefs.
-        addon_advice = layout.column(align=True)
-        addon_advice.scale_y = 0.7        
-        if resources_folder_exists != True:
-            addon_advice.label(text="Please select a 'resources' folder")
-            addon_advice.label(text="in this add-on's Preferences")
-        else:
-            addon_advice.label(text="Opening the Console window is")
-            addon_advice.label(text="recommended for error-checking")
-
-
-        # locate_characters_assets UI
-        tool_section = layout.box().column(align=True)
-        tool_section.enabled = resources_folder_exists
-        tool_section.operator("swtor.character_assembler", text="Select 'paths.json' File")
-        tool_section.prop(context.scene, "swca_gather_only_bool", text="Gather Assets only")
-        tool_section.prop(context.scene, "swca_dont_overwrite_bool", text="Don't Overwrite Assets")
-        tool_section.prop(context.scene, "swca_collect_bool", text="Collect By In-Game Names")
-        tool_section.prop(context.scene, "swca_import_armor_only", text="Import Armor Gear Only")
-        tool_section.prop(context.scene, "swca_import_skeleton_bool", text="Import Rigging Skeleton")
-        tool_section.prop(context.scene, "swca_bind_to_skeleton_bool", text="Bind Objects To Skeleton")
-
-
-
 # REGISTRATIONS ---------------------------------------------
 
 classes = [
     SWTOR_OT_character_assembler,
-    SWTOR_PT_character_assembler,
 ]
 
 def register():
     for cls in classes:
         bpy.utils.register_class(cls)
-        
+
     bpy.types.Scene.swca_gather_only_bool = bpy.props.BoolProperty(
         name="Gather Assets Only",
         description="Don't import the character, just copy the required assets\nto the Character's folder",
         default = False,
     )
+    
     bpy.types.Scene.swca_dont_overwrite_bool = bpy.props.BoolProperty(
         name="Don't overwrite Existing assets",
         description="If the character's folder contains some assets already, don't overwrite those.\nThat will preserve any changes done to them, such as manual retouchings",
@@ -658,25 +622,25 @@ def register():
 
     bpy.types.Scene.swca_collect_bool = bpy.props.BoolProperty(
         name="Collect By In-Game Names",
-        description="Organizes the Character's Objects in Collections named after their in-game names.\nThe Collections will be set inside the currently Active Collection in the Outliner.",
+        description="Organizes the Character's Objects in Collections named after their in-game names.\nThe Collections will be set inside the currently Active Collection in the Outliner",
         default = True,
     )
 
     bpy.types.Scene.swca_import_armor_only = bpy.props.BoolProperty(
         name="Import Armor Gear Only",
-        description="Import only the armor gear elements and omit the rest of the body.",
+        description="Import only the armor gear elements and omit the rest of the body",
         default = False,
     )
 
     bpy.types.Scene.swca_import_skeleton_bool = bpy.props.BoolProperty(
         name="Import Rigging Skeleton",
-        description="Import the character's Skeleton Object if available.",
+        description="Import the character's Skeleton Object if available",
         default = False,
     )
 
     bpy.types.Scene.swca_bind_to_skeleton_bool = bpy.props.BoolProperty(
         name="Bind Objects To Skeleton",
-        description="Bind all objects to the skeleton, if imported.",
+        description="Bind all objects to the skeleton, if imported",
         default = False,
     )
 

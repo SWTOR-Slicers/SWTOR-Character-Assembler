@@ -2,10 +2,8 @@ import bpy
 import os
 from pathlib import Path
 
-class SWCL_addonPreferences(bpy.types.AddonPreferences):
+class addonPreferences(bpy.types.AddonPreferences):
     bl_idname = __package__
-
-    # Preferences properties --------------------
 
     # resources folderpath
     swtor_resources_folderpath: bpy.props.StringProperty(
@@ -15,7 +13,6 @@ class SWCL_addonPreferences(bpy.types.AddonPreferences):
         default = "Choose or type the folder's path",
         maxlen = 1024
     )
-
 
     # UI ----------------------------------------
     
@@ -31,14 +28,13 @@ class SWCL_addonPreferences(bpy.types.AddonPreferences):
         pref_box.prop(self, 'swtor_resources_folderpath', expand=True)
 
 
-
 # Registrations
 
 def register():
-    bpy.utils.register_class(SWCL_addonPreferences)
+    bpy.utils.register_class(addonPreferences)
 
 def unregister():
-    bpy.utils.unregister_class(SWCL_addonPreferences)
+    bpy.utils.unregister_class(addonPreferences)
 
 if __name__ == "__main__":
     register()

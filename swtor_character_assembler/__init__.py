@@ -6,12 +6,12 @@ import importlib
 bl_info = {
     "name": "SWTOR Character Assembler",
     "author": "ZeroGravitas",
-    "version": (2, 0, 0),
+    "version": (3, 0, 0),
     "blender": (3, 1, 0),
-    "category": "SWTOR Tools",
-    "location": "View 3D > Sidebar > SWTOR Tools",
-    "description": "Imports SWTOR characters and NPCs' folders exported from TORCommunity.com",
-    "doc_url": "https://github.com/SWTOR-Slicers/swtor-character-assembler",
+    "category": "SWTOR",
+    "location": "View 3D > Sidebar > ZG SWTOR",
+    "description": "SWTOR Character Importer and Assembler",
+    "doc_url": "https://github.com/SWTOR-Slicers/swtor_character_assembler",
     "tracker_url": "",
 }
 
@@ -20,9 +20,13 @@ bl_info = {
 # (See https://b3d.interplanety.org/en/creating-multifile-add-on-for-blender/ )
 
 modulesNames = [
+    'ui',
     'preferences',
+    'deduplicate_materials',
+    'deduplicate_nodegroups',
     'character_assembler',
     'prefixer',
+    'convert_to_legacy_materials'
     ]
   
 modulesFullNames = {}
