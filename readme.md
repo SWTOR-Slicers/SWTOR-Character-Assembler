@@ -1,6 +1,10 @@
 # SWTOR Character Assembler
 
+<<<<<<< HEAD
 **This Blender Addon allows for the processing of [TORCommunity.com's Character Designer](https://github.com/SWTOR-Slicers/WikiPedia/wiki/Using-TORCommunity-Character-Designer)'s .zipped SWTOR characters folders directly from Blender.**
+=======
+**This Blender Addon combines the functionality of the [Slicers GUI Tool](https://github.com/SWTOR-Slicers/Slicers-GUI)'s Locate feature and the [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)'s Character Importer as an automated one-button process. It also comes with a quick Objects/Materials/Collections prefixer to be able to do and organize multiple imports in a single Blender project.**
+>>>>>>> 14c5c9f82917baee0694fc1be65bdd174cbc5b15
 
 **It combines the previous two-steps functionality of the [Slicers GUI Tool](https://github.com/SWTOR-Slicers/Slicers-GUI)'s Locate feature and the [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)'s Character Importer as an automated one-button process. It also comes with a quick Objects / Materials / Collections prefixer to be able to do multiple imports in a single Blender project, and with a Materials converter to facilitate baking operations for exporting SWTOR characters to other apps.**
 
@@ -26,7 +30,12 @@ The SWTOR Character Assembler:
 
 
 * Under the hood, the Addon calls Darth Atroxa's .gr2 Importer Addon's Character Import feature to assemble the character. It should be pointed out that this means this Addon has the same limitations regarding Creature-type (single mesh) NPCs, and some bugs importing body and armor parts with two materials, such as underwear ones (the latter seems to be solved and is waiting for a revision before release).
+<<<<<<< HEAD
 
+=======
+* It adds a series of "quality of life" options to the process, such as collecting armor parts by their in-game names.
+* Also, it comes with a **Character Prefixer**: it allows for adding a prefix not just to the names of a selection of objects but to their materials' names and the Collections holding them, with a single click. Doing this to the results of a character import lets us make all those names unique enough **to be able to import several characters to the same Blender project** (for example, different sets of armor) without making an utter mess of their materials.
+>>>>>>> 14c5c9f82917baee0694fc1be65bdd174cbc5b15
 * **It reports its progress and errors through Blender's Console**. It is recommended to keep it open to check for any error message, as it lists all the files it detects and copies, showing if any entry is malformed or leads to an inexistent file.
 
 * It adds a series of "quality of life" options to the process, such as collecting armor parts by their in-game names.
@@ -55,11 +64,19 @@ The Addon's importing options are:
 * **Bind Objects To Skeleton**: binds the character's objects to the imported skeleton.
 
 ## Installation
+<<<<<<< HEAD
 The installation process is the typical for any standard Blender Addon: in Preferences > Add-Ons, install the Addon's .zip file, and then enable it by ticking its checkbox. The Addon will be available in the 3D Viewport's Sidebar as a "SWTOR Character Tools" tab.
+=======
+The installation process is the typical in any standard Blender Addon. In order to work, it requires us to set the path to a SWTOR assets extraction's `resources` folder. We do that in its Preferences panel. If not set, the Addon's button will be greyed out.
+>>>>>>> 14c5c9f82917baee0694fc1be65bdd174cbc5b15
 
 In order to work, it requires us to set the path to a SWTOR assets extraction's `resources` folder. We do that in its Preferences panel.
 
+<<<<<<< HEAD
 ![Alt text](images/swtor_char_assembler_020.png)
+=======
+The Addon appears in the 3D Viewport's Sidebar as a "SWTOR Character Tools" tab. Instead of selecting a character's whole folder as we do with the Slicers GUI tool, it needs us to select the "path.json" file inside, instead. Processing the file is nearly instantaneous.
+>>>>>>> 14c5c9f82917baee0694fc1be65bdd174cbc5b15
 
 If not set, the Addon's Status information will tell us what is missing, and set the affected tools to red. Generally, the tools' tooltips will explain what they do and what their requisites are.
 
