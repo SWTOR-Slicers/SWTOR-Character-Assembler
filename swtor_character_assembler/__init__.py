@@ -6,8 +6,8 @@ import importlib
 bl_info = {
     "name": "SWTOR Character Assembler",
     "author": "ZeroGravitas",
-    "version": (1, 3, 0),
-    "blender": (2, 83, 0),
+    "version": (1, 4, 0),
+    "blender": (3, 1, 0),
     "category": "SWTOR",
     "location": "View 3D > Sidebar > ZG SWTOR",
     "description": "SWTOR Character Importer and Assembler",
