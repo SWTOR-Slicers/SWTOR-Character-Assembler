@@ -16,7 +16,8 @@
 ## Features
 The SWTOR Character Assembler:
 * Fills a Player Character/NPC's folder (exported by TORCommunity.com's Character Designer or NPC database) with all the game assets required for assembling them in Blender.  
-  **It gathers the character or NPC's skeleton rig**, saving it inside a "skeleton" folder next to "models" and "materials". **WARNING: we aren't yet compatible with SWTOR 64 bit (Game Update 7.2.1 onwards)'s skeletons**. This Addon can work with skeletons from assets extractions previous to Game Update, though.
+
+  **It gathers the character or NPC's skeleton rig**, saving it inside a "skeleton" folder next to "models" and "materials". **WARNING: we aren't yet compatible with SWTOR 64 bit (Game Update 7.2.1 onwards)'s skeletons**. This Addon can work with skeletons from asset extractions previous to that Game Update, though.
 
   It solves some long lingering issues, such as placing the typically **missing "black.dds" texturemap** in our SWTOR asset extractions if absent.  
 
