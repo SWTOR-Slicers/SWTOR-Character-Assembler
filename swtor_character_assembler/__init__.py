@@ -6,7 +6,7 @@ import importlib
 bl_info = {
     "name": "SWTOR Character Assembler",
     "author": "ZeroGravitas",
-    "version": (3, 0, 0),
+    "version": (3, 1, 0),
     "blender": (3, 1, 0),
     "category": "SWTOR",
     "location": "View 3D > Sidebar > ZG SWTOR",
@@ -26,7 +26,8 @@ modulesNames = [
     'deduplicate_nodegroups',
     'character_assembler',
     'prefixer',
-    'convert_to_legacy_materials'
+    'convert_to_legacy_materials',
+    'baking_tools',
     ]
   
 modulesFullNames = {}

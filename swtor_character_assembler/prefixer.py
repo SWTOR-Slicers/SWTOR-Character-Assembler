@@ -56,7 +56,7 @@ class SWTOR_OT_prefixer(bpy.types.Operator):
     prefix: bpy.props.StringProperty(
         name="Prefix",
         default="",
-        options=('HIDDEN'),
+        options={'HIDDEN'}
     )
 
     prefix_mats_skeletons: bpy.props.BoolProperty(

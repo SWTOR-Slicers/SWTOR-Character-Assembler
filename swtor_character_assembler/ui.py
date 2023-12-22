@@ -82,10 +82,10 @@ class SWTOR_PT_files_tools(bpy.types.Panel):
         tool_section_props = tool_section.column(align=True)
         tool_section_props.scale_y = 0.75
         tool_section_props.prop(context.scene, "swca_gather_only_bool", text="Gather Assets only")
-        tool_section_props.prop(context.scene, "swca_assemble_only_bool", text="Assemble Assets only")
         tool_section_props.prop(context.scene, "swca_dont_overwrite_bool", text="Don't Overwrite Assets")
         tool_section_props.prop(context.scene, "swca_collect_bool", text="Collect By In-Game Names")
         tool_section_props.prop(context.scene, "swca_import_armor_only", text="Import Armor Gear Only")
+        tool_section_props.prop(context.scene, "swca_complete_nude_body", text="Complete Full Nude Body")
         tool_section_props.prop(context.scene, "swca_import_skeleton_bool", text="Import Rigging Skeleton")
         tool_section_props.prop(context.scene, "swca_bind_to_skeleton_bool", text="Bind Objects To Skeleton",)
         
@@ -147,6 +147,10 @@ class SWTOR_PT_baking_tools(bpy.types.Panel):
         tool_section.operator("swtor.convert_to_legacy_materials", text="Convert All Materials")
         tool_section.prop(context.scene, "add_baking_targets_bool", text="Add Baking Texture Nodes")
 
+
+        # tool_section = layout.box()
+        # tool_section.operator("swtor.baking_tools", text="Add Targets")
+        # diffuse = tool_section.operator("swtor.baking_tools", text="Add Targets")
 
 
 
