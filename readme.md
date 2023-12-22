@@ -4,6 +4,8 @@
 
 **It combines the previous two-steps functionality of the [Slicers GUI Tool](https://github.com/SWTOR-Slicers/Slicers-GUI)'s Locate feature and the [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)'s Character Importer as an automated one-button process. It also comes with a quick Objects / Materials / Collections prefixer to be able to do multiple imports in a single Blender project, and with a Materials converter to facilitate baking operations for exporting SWTOR characters to other apps.**
 
+It should be noted that this Add-on's tools exist in the **[ZeroGravitas (ZG) SWTOR Tools Add-on](https://github.com/SWTOR-Slicers/ZG-SWTOR-Tools)**, too (that one is kind of an "all-in-one" add-on).
+
 ![Alt text](images/swtor_char_assembler_010.png)
 
 ## **[Download the Addon's latest release](https://github.com/SWTOR-Slicers/SWTOR-Character-Locator/releases/latest)**
@@ -16,8 +18,7 @@
 ## Features
 The SWTOR Character Assembler:
 * Fills a Player Character/NPC's folder (exported by TORCommunity.com's Character Designer or NPC database) with all the game assets required for assembling them in Blender.  
-
-  **It gathers the character or NPC's skeleton rig**, saving it inside a "skeleton" folder next to "models" and "materials". **WARNING: we aren't yet compatible with SWTOR 64 bit (Game Update 7.2.1 onwards)'s skeletons**. This Addon can work with skeletons from asset extractions previous to that Game Update, though.
+  **It gathers the character or NPC's skeleton rig**, saving it inside a "skeleton" folder next to "models" and "materials".
 
   It solves some long lingering issues, such as placing the typically **missing "black.dds" texturemap** in our SWTOR asset extractions if absent.  
 
