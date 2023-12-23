@@ -85,7 +85,6 @@ class SWTOR_PT_files_tools(bpy.types.Panel):
         tool_section_props.prop(context.scene, "swca_dont_overwrite_bool", text="Don't Overwrite Assets")
         tool_section_props.prop(context.scene, "swca_collect_bool", text="Collect By In-Game Names")
         tool_section_props.prop(context.scene, "swca_import_armor_only", text="Import Armor Gear Only")
-        tool_section_props.prop(context.scene, "swca_complete_nude_body", text="Complete Full Nude Body")
         tool_section_props.prop(context.scene, "swca_import_skeleton_bool", text="Import Rigging Skeleton")
         tool_section_props.prop(context.scene, "swca_bind_to_skeleton_bool", text="Bind Objects To Skeleton",)
         
