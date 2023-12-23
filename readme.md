@@ -11,7 +11,7 @@ It should be noted that this Add-on's tools exist in the **[ZeroGravitas (ZG) SW
 ## **[Download the Addon's latest release](https://github.com/SWTOR-Slicers/SWTOR-Character-Locator/releases/latest)**
 
 ## Requirements:
-* **An enabled ["Modern" .gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)**, as this one calls it to execute the actual character importing and assembling.
+* **An enabled [.gr2 Importer Addon](https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x)**, as this one calls it to execute the actual character importing and assembling.
 * **A SWTOR assets extraction** performed via **[Slicers GUI](https://github.com/SWTOR-Slicers/Slicers-GUI)** (with either the "Dynamic" or "All" presets) or EasyMYP.
 * **TORCommunity.com's Character Designer-exported (unzipped) folders**, or non-Creature-type NPCs ones exported from its NPC database.  
 * **THERE'S NO NEED TO PROCESS THE FOLDERS WITH THE SLICERS GUI'S LOCATE FEATURE**. It's the whole point of this new Addon 🙂.
