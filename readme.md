@@ -1,4 +1,4 @@
-## As this standalone Add-on is falling behind the version integrated in the [ZG SWTOR Tools Add-on](https://github.com/SWTOR-Slicers/ZG-SWTOR-Tools) in compatibility and features, we are deprecating it. Please use the ZG Tools instead.
+## As this standalone Add-on is falling behind the version integrated in the ZG SWTOR Tools in compatibility and features, we are deprecating it. Please [download and use the ZG SWTOR Tools Add-on, instead](https://github.com/SWTOR-Slicers/ZG-SWTOR-Tools).
 
 # SWTOR Character Assembler
 
